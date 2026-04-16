@@ -9,6 +9,24 @@ import pkg from "./package.json" with { type: "json" }
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), "")
+	const s3ProxyPath = env.VITE_S3_PROXY_PATH || "/s3"
+	const proxy = {
+		"/api": {
+			target: env.API_HOST,
+			changeOrigin: true,
+			rewrite: (path: string) => path.replace(/^\/api/, ""),
+		},
+	} as Record<string, { target: string; changeOrigin: boolean; rewrite: (path: string) => string }>
+
+	if (env.VITE_S3_ENDPOINT) {
+		const s3ProxyMatcher = new RegExp(`^${s3ProxyPath}`)
+		proxy[s3ProxyPath] = {
+			target: env.VITE_S3_ENDPOINT,
+			changeOrigin: true,
+			rewrite: (path: string) => path.replace(s3ProxyMatcher, ""),
+		}
+	}
+
 	return {
 		plugins: [
 			VueRouter(),
@@ -28,13 +46,7 @@ export default defineConfig(({ mode }) => {
 		},
 		publicDir: "static",
 		server: {
-			proxy: {
-				"/api": {
-					target: env.API_HOST,
-					changeOrigin: true,
-					rewrite: (path) => path.replace(/^\/api/, ""),
-				},
-			},
+			proxy,
 		},
 		define: {
 			"import.meta.env.VITE_APP_VERSION": JSON.stringify(pkg.version),

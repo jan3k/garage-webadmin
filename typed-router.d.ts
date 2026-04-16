@@ -80,6 +80,13 @@ declare module 'vue-router/auto-routes' {
       '/buckets/:id',
       { id: ParamValue<true> },
       { id: ParamValue<false> },
+      | '/buckets/[id]/objects'
+    >,
+    '/buckets/[id]/objects': RouteRecordInfo<
+      '/buckets/[id]/objects',
+      '/buckets/:id/objects',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
       | never
     >,
     '/layout/': RouteRecordInfo<
@@ -168,6 +175,13 @@ declare module 'vue-router/auto-routes' {
     'src/pages/buckets/[id].vue': {
       routes:
         | '/buckets/[id]'
+        | '/buckets/[id]/objects'
+      views:
+        | 'default'
+    }
+    'src/pages/buckets/[id]/objects.vue': {
+      routes:
+        | '/buckets/[id]/objects'
       views:
         | never
     }
