@@ -1,0 +1,21 @@
+---
+layout: layouts/base.html
+---
+
+<div class="content">
+	<h1>{{ title }}</h1>
+	<main class="content container container--medium">
+		{{ content | safe }}
+
+		{% set currentPageNavigationData = collections.all | eleventyNavigation | findCurrentNavItem(page) %}
+		{% if currentPageNavigationData.children.length %}
+		<hr>
+		<h2>Table of content</h2>
+		<ul>
+			{%- for child in currentPageNavigationData.children %}
+			<li><a href="{{ child.url }}">{{ child.title }}</a></li>
+			{% endfor -%}
+		</ul>
+		{% endif %}
+	</main>
+</div>

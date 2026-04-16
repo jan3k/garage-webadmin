@@ -1,0 +1,31 @@
+.header {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+	padding: 1rem .875rem;
+}
+
+.header-logo svg {
+	max-width: 100%;
+}
+
+@media (--screen-md) {
+	.header {
+		padding: 1rem;
+	}
+}
+
+.header-actions {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+	gap: 1rem;
+	font-size: var(--ui-text-small);
+	line-height: var(--ui-text-small-lh);
+}
+
+@media (--screen-md--reverse) {
+	.header-actions_mobileBtn {
+		display: none;
+	}
+}

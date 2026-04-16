@@ -1,0 +1,73 @@
+body {
+	font-family: var(--fontstack-sans);
+	font-size: var(--ui-text-body);
+	line-height: var(--ui-text-body-lh);
+	color: var(--color-gray-900);
+	background-color: var(--color-gray-200);
+}
+
+/* Spread the VueJS app's container */
+#app {
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Smooth focus ring */
+* {
+	outline-color: var(--color-brand-3);
+	outline-offset: calc(-1 * var(--space-2));
+}
+*:focus-visible {
+	outline-style: solid;
+	outline-width: var(--space-2);
+	outline-color: var(--color-brand-3);
+	outline-offset: var(--space-1);
+	transition: outline-offset 0.1s ease;
+}
+
+/* Titles
+-------------------------------------------------- */
+
+.title {
+	font-family: var(--fontstack-heading);
+	font-weight: 600;
+}
+
+.title-1 {
+	font-size: var(--ui-text-h1);
+	line-height: var(--ui-text-h1-lh);
+}
+
+.title-2 {
+	font-size: var(--ui-text-h3);
+	line-height: var(--ui-text-h3-lh);
+}
+
+.title-3 {
+	font-size: var(--ui-text-h3);
+	line-height: var(--ui-text-h3-lh);
+}
+
+/* Containers
+-------------------------------------------------- */
+
+.container {
+	max-width: var(--container);
+}
+
+.container--small {
+	max-width: var(--container-small);
+}
+
+.container--medium {
+	max-width: var(--container-medium);
+}
+
+.container--large {
+	max-width: var(--container-large);
+}
+
+.container--larger {
+	max-width: var(--container-larger);
+}

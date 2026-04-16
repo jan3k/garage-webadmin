@@ -1,0 +1,14 @@
+.progressbar {
+	--progressbar-height: var(--space-6);
+	--progressbar-color: var(--color-gray-700);
+	--progressbar-bg: var(--color-gray-200);
+	background: var(--progressbar-bg);
+	border-radius: 420rem;
+}
+
+.progressbar-progress {
+	background: var(--progressbar-color);
+	width: calc(1% * var(--progressbar-value, 0));
+	border-radius: 420rem;
+	height: var(--progressbar-height, 1lh);
+}

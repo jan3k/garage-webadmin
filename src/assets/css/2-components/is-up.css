@@ -1,0 +1,10 @@
+.isUp {
+	aspect-ratio: 1;
+	width: 0.875rem;
+	flex-shrink: 0;
+	color: var(--color-accent-green);
+}
+
+.isUp--down {
+	color: var(--color-accent-orange);
+}

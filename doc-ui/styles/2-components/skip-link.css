@@ -1,0 +1,18 @@
+.skip-link {
+	position: absolute;
+	display: inline-block;
+	padding: .5em;
+	z-index: 1001;
+	top: .1em;
+	left: .2em;
+	font-size: 1rem;
+	color: var(--color-gray-900);
+	text-align: center;
+	background-color: var(--color-gray-300);
+}
+
+.skip-link:not(:focus) {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+}

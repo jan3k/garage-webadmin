@@ -1,0 +1,7 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"ignorePatterns": ["doc-ui", "package-lock.json", "typed-router.d.ts"],
+	"semi": false,
+	"useTabs": true,
+	"printWidth": 140
+}

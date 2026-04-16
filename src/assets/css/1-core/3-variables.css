@@ -1,0 +1,65 @@
+:root {
+	--fontstack-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	--fontstack-monospace: ui-monospace, monospace, var(--fontstack-emoji);
+	--fontstack-sans: ui-sans-serif, system-ui, sans-serif, var(--fontstack-emoji);
+	--fontstack-serif: ui-serif, serif, var(--fontstack-emoji);
+	--fontstack-heading:
+		"Fira Sans", "Fira Sans Fallback", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif,
+		var(--fontstack-emoji);
+
+	--ui-text-display: 2.5rem;
+	--ui-text-display-lh: 1.3;
+	--ui-text-h1: 1.625rem;
+	--ui-text-h1-lh: 1.3846;
+	--ui-text-h2: 1.375rem;
+	--ui-text-h2-lh: 1.3636;
+	--ui-text-h3: 1.125rem;
+	--ui-text-h3-lh: 1.4444;
+	--ui-text-large: 1.125rem;
+	--ui-text-large-lh: 1.44;
+	--ui-text-body: 1rem;
+	--ui-text-body-lh: 1.5;
+	--ui-text-small: 0.875rem;
+	--ui-text-small-lh: 1.4285;
+	--ui-text-tiny: 0.75rem;
+	--ui-text-tiny-lh: 1.5;
+
+	--shadow-box-1: 0 0.0625rem 0.125rem var(--color-gray-350);
+	--shadow-box-2: 0 0.0625rem 0.25rem var(--color-gray-350);
+	--shadow-box-3: 0 0.0625rem 0.3125rem var(--color-gray-350);
+	--shadow-box-4: 0 0.125rem 0.25rem var(--color-gray-350);
+	--shadow-box-5: 0 0.25rem 0.5rem var(--color-gray-350);
+
+	--container: 50rem;
+	--container-small: 37.5rem;
+	--container-medium: 53.125rem;
+	--container-large: 64rem;
+	--container-larger: 112.5rem;
+
+	--container-modal: 28.75rem;
+
+	--container-box-shadow: var(--shadow-box-4);
+	--container-box-border: 0.0625rem solid var(--color-gray-250);
+	--container-box-radius: 0.5rem;
+	--container-box-inset: var(--space-24);
+
+	--card-box-bg: var(--color-gray-100);
+	--card-box-shadow: var(--shadow-box-3), inset 0 -0.125rem 0 var(--color-gray-150);
+	--card-box-border-width: 0.0625rem;
+	--card-box-border-color: var(--color-gray-400);
+	--card-box-radius: 0.5rem;
+	--card-box-inset: var(--space-16);
+	--card-box-gap: var(--space-12);
+	--card-box-ico-color: var(--color-gray-650);
+
+	--section-gap: var(--space-24);
+
+	@custom-media --screen-lg (max-width: 64rem);
+	@custom-media --screen-lg--reverse (min-width: 64rem);
+	@custom-media --screen-md (max-width: 50rem);
+	@custom-media --screen-md--reverse (min-width: 50rem);
+	@custom-media --screen-sm (max-width: 25rem);
+	@custom-media --screen-sm--reverse (min-width: 25rem);
+
+	@design-token-utils (custom-properties);
+}

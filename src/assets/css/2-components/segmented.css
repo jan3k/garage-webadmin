@@ -1,0 +1,26 @@
+.segmented {
+	display: flex;
+	gap: 0;
+}
+
+.segmented > *:not(:first-child) {
+	margin-inline-start: calc(var(--btn-border-width, 0.0625rem) * -1);
+}
+
+.segmented > *:not(:first-child, :last-child) {
+	border-radius: 0;
+}
+
+.segmented > *:first-child {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.segmented > *:last-child {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.segmented > *:is(:hover, :active, :focus-visible) {
+	z-index: 1;
+}

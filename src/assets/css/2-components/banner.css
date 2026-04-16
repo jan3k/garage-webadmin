@@ -1,0 +1,105 @@
+.banner {
+	--banner-accent: var(--color-accent-blue);
+	--banner-inset: var(--space-12);
+	--banner-gap: calc(var(--banner-inset) / 1.5);
+	--banner-radius: var(--space-8);
+	--banner-border-width: var(--space-1);
+	--banner-border-color: var(--banner-accent);
+	--banner-bg: var(--color-accent-light-blue);
+	--banner-color: var(--color-accent-dark-blue);
+	display: grid;
+	grid-template-columns: min-content minmax(0, 1fr) auto;
+	padding: calc(var(--banner-inset) - (var(--banner-border-width) * 1));
+	border: var(--banner-border-width) solid var(--banner-border-color);
+	border-radius: var(--banner-radius);
+	background: var(--banner-bg);
+	align-items: center;
+	column-gap: 0;
+	row-gap: calc(var(--banner-gap) / 2);
+	color: var(--banner-color);
+}
+
+.banner-head {
+	grid-column: 2 / 3;
+	align-content: center;
+}
+
+/* Styles
+-------------------------------------------------- */
+
+.banner--warning {
+	--banner-accent: var(--color-accent-orange);
+	--banner-bg: var(--color-accent-light-orange);
+	--banner-color: var(--color-accent-dark-orange);
+}
+
+.banner--error {
+	--banner-accent: var(--color-accent-red);
+	--banner-bg: var(--color-accent-light-red);
+	--banner-color: var(--color-accent-dark-red);
+}
+
+/* Icon
+-------------------------------------------------- */
+
+.banner-ico {
+	color: var(--banner-accent);
+	line-height: 0;
+	grid-row: 1 / 2;
+	margin-right: var(--banner-gap);
+}
+
+.banner:has(.banner-content) .banner-ico {
+	grid-row: 1 / 3;
+}
+
+.banner-ico svg {
+	width: var(--space-24);
+	height: var(--space-24);
+}
+
+.banner-ico--top {
+	grid-row: 1 / 2;
+	align-self: self-start;
+}
+
+/* Content
+-------------------------------------------------- */
+
+.banner-content {
+	font-size: var(--ui-text-body);
+	line-height: var(--ui-text-body-lh);
+	flex-grow: 1;
+	min-width: 0;
+	grid-column: 2 / 4;
+}
+
+.banner-content:empty {
+	display: none;
+}
+
+.banner-title {
+	display: block;
+	font-weight: 600;
+}
+
+.banner-logs {
+	margin: 0;
+	margin-top: 1lh;
+	overflow: auto;
+	max-height: 50vh;
+	max-width: 100%;
+	min-width: 0;
+	font-size: var(--ui-text-tiny);
+	line-height: var(--ui-text-tiny-lh);
+	font-family: var(--fontstack-monospace);
+	white-space: pre;
+	scrollbar-gutter: stable both-edges;
+	tab-size: 2;
+}
+
+.banner-actions {
+	margin-left: var(--banner-gap);
+	min-height: 1lh;
+	align-self: self-start;
+}

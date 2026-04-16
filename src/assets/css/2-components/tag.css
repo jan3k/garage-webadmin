@@ -1,0 +1,82 @@
+.tag {
+	--tag-inset-block: var(--space-4);
+	--tag-inset-inline: var(--space-6);
+	--tag-color: var(--color-gray-800);
+	--tag-bg: var(--color-gray-50);
+	--tag-gap: var(--space-2);
+	--tag-radius: var(--space-6);
+	--tag-border-color: var(--color-gray-200);
+	--tag-border-width: var(--space-1);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--tag-gap);
+	padding-block: calc(var(--tag-inset-block) - var(--tag-border-width));
+	padding-inline: calc(var(--tag-inset-inline) - var(--tag-border-width));
+	font-size: var(--ui-text-small);
+	line-height: var(--ui-text-small-lh);
+	color: var(--tag-color);
+	background: var(--tag-bg);
+	border: var(--tag-border-width) solid var(--tag-border-color);
+	border-radius: var(--tag-radius);
+}
+
+.tag--small {
+	--tag-inset-block: var(--space-2);
+	--tag-inset-inline: var(--space-4);
+	font-size: var(--ui-text-tiny);
+	line-height: var(--ui-text-tiny-lh);
+}
+
+.tag--tiny {
+	--tag-inset-block: 0;
+	--tag-inset-inline: var(--space-4);
+	--tag-radius: var(--space-4);
+	font-size: var(--ui-text-tiny);
+	line-height: calc(0.85 * var(--ui-text-tiny-lh));
+}
+
+.tag--square {
+	--tag-inset-inline: var(--tag-inset-block);
+	text-align: center;
+	min-width: calc(2ch + (2 * (var(--tag-inset-inline) + var(--tag-border-width))));
+}
+
+.tag svg {
+	height: var(--space-16);
+	width: auto;
+}
+
+.tag--small svg {
+	height: var(--space-14);
+}
+
+/* Styles
+-------------------------------------------------- */
+
+.tag--pill {
+	--tag-border-radius: 420rem;
+}
+
+.tag--green {
+	--tag-color: var(--color-accent-dark-green);
+	--tag-border-color: var(--color-accent-green);
+	--tag-bg: var(--color-accent-light-green);
+}
+
+.tag--orange {
+	--tag-color: var(--color-accent-dark-orange);
+	--tag-border-color: var(--color-accent-orange);
+	--tag-bg: var(--color-accent-light-orange);
+}
+
+.tag--red {
+	--tag-color: var(--color-accent-dark-red);
+	--tag-border-color: var(--color-accent-red);
+	--tag-bg: var(--color-accent-light-red);
+}
+
+.tag--blue {
+	--tag-color: var(--color-accent-dark-blue);
+	--tag-border-color: var(--color-accent-blue);
+	--tag-bg: var(--color-accent-light-blue);
+}

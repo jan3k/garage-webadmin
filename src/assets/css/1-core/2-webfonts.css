@@ -1,0 +1,19 @@
+@font-face {
+	font-family: "Fira Sans";
+	src:
+		local("Fira Sans SemiBold"),
+		local("FiraSans-SemiBold"),
+		url("/fonts/FiraSans-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Fira Sans Fallback";
+	src: local(Arial);
+	size-adjust: 101%;
+	ascent-override: normal;
+	descent-override: normal;
+	line-gap-override: normal;
+}

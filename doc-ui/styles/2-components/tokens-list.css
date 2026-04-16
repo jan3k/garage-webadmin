@@ -1,0 +1,51 @@
+/* -------------------------------------------------
+== Tokens list component
+-------------------------------------------------- */
+
+/* Color tokens
+-------------------------------------------------- */
+
+.tokenColor-list {
+	--token-pill-size: 5rem;
+	max-width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fill,minmax(min(calc(var(--token-pill-size) * 1.2),100%),1fr));
+	gap: 1.25rem 1rem;
+	flex-wrap: wrap;
+}
+
+.tokenColor-item {
+	display: flex;
+	flex-direction: column;
+	gap: .3rem;
+	text-align: center;
+}
+
+.tokenColor-pill {
+	aspect-ratio: 1;
+	border-radius: 100%;
+	width: var(--token-pill-size);
+	background-color: var(--value, var(--color-accent-red));
+	margin-inline: auto;
+	box-shadow: var(--shadow-light-1);
+}
+
+.tokenColor-label {
+	font-size: var(--ui-text-small);
+	line-height: calc(var(--ui-text-small-lh) * 0.85);
+}
+
+.tokenColor-helper,
+.tokenColor-value {
+	padding: .1rem .3rem;
+	align-self: center;
+	font-family: var(--fontstack-monospace);
+	font-size: var(--ui-text-tiny);
+	line-height: var(--ui-text-tiny-lh);
+	background: var(--color-gray-150);
+	border-radius: .2rem;
+}
+
+.tokenColor-value {
+	text-transform: uppercase;
+}

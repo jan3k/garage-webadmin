@@ -1,0 +1,48 @@
+/* Layout blocks
+-------------------------------------------------- */
+
+.f-container {
+	max-width: var(--container--small);
+}
+
+.f-group:where(:not(:first-child)) {
+	margin-top: var(--space-32);
+}
+
+.f-group > :where(label, .label) {
+	margin-top: 0;
+	display: block;
+	margin-bottom: 0.375em;
+}
+
+/* Text fiels
+-------------------------------------------------- */
+
+input:where(:not([type="radio"]), :not([type="checkbox"])),
+textarea,
+select {
+	--input-inset-block: 0.75rem;
+	--input-inset-inline: 0.875rem;
+	--input-border-width: 0.0625rem;
+	--input-border-color: var(--color-gray-450);
+	--input-radius: 0.5rem;
+	--input-shadow: var(--shadow-box-2);
+
+	padding-block: calc(var(--input-inset-block) - var(--input-border-width));
+	padding-inline: calc(var(--input-inset-inline) - var(--input-border-width));
+	background: var(--color-gray-50);
+	border: var(--input-border-width) solid var(--input-border-color);
+	border-radius: var(--input-radius);
+	box-shadow: var(--input-shadow);
+	color: var(--color-gray-950);
+	font-size: var(--ui-text-body);
+	line-height: var(--ui-text-body-lh);
+	transition: 0.15s all;
+}
+
+input:where(:not([type="radio"]), :not([type="checkbox"])):focus,
+textarea:focus,
+select:focus {
+	--input-border-color: currentColor;
+	--input-shadow: 0 0 0 transparent;
+}

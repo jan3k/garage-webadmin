@@ -1,0 +1,133 @@
+.dropdown {
+	--dropdown-inset-block: var(--space-16);
+	--dropdown-inset-inline: var(--space-18);
+	--dropdown-gap: var(--space-12);
+	--dropdown-radius: var(--space-8);
+	--dropdown-border-width: var(--space-1);
+	--dropdown-border-color: var(--color-gray-400);
+	position: absolute;
+	position-anchor: auto;
+	position-area: bottom span-left;
+	inset: auto;
+	max-width: 90vw;
+	background: var(--color-gray-50);
+	border: var(--dropdown-border-width) solid var(--dropdown-border-color);
+	border-radius: var(--dropdown-radius);
+	margin-top: var(--space-2);
+	padding: 0;
+	box-shadow: var(--shadow-box-5);
+	transition:
+		opacity 0.3s,
+		translate 0.315s;
+}
+
+.dropdown--small {
+	--dropdown-radius: var(--space-6);
+}
+
+/* Animation
+-------------------------------------------------- */
+
+.dropdown:not(:popover-open) {
+	opacity: 0;
+	translate: 0 -0.5em;
+}
+
+.dropdown:popover-open {
+	opacity: 1;
+	translate: 0 0;
+}
+
+@starting-style {
+	.dropdown:popover-open {
+		opacity: 0;
+		translate: 0 -0.5em;
+	}
+}
+
+/* Content
+-------------------------------------------------- */
+
+.dropdown-content,
+.dropdown-item,
+.dropdown-title {
+	min-width: max-content;
+	width: 100%;
+	padding: var(--dropdown-inset-block) var(--dropdown-inset-inline);
+}
+
+.dropdown-item {
+	display: flex;
+	align-items: center;
+	gap: var(--dropdown-gap);
+	padding: var(--dropdown-inset-block) var(--dropdown-inset-inline);
+	color: currentColor;
+	border: none;
+	background: transparent;
+	text-decoration: none;
+}
+
+.dropdown-item > svg {
+	color: var(--color-gray-650);
+}
+
+.dropdown-item--destructive {
+	color: var(--color-accent-red);
+}
+
+.dropdown-item--destructive > svg {
+	color: currentColor;
+}
+
+:where(a.dropdown-item, button.dropdown-item):is(:hover, :active, :focus-visible) {
+	background-color: var(--color-brand-1);
+	outline-offset: -0.1875rem;
+}
+
+.dropdown-item--destructive:is(:hover, :active, :focus-visible) {
+	background-color: var(--color-accent-light-red);
+	outline-color: currentColor;
+}
+
+.dropdown-itemContent {
+	flex-grow: 1;
+}
+
+.dropdown-title {
+	padding-top: calc(0.75 * var(--dropdown-inset-block));
+	padding-bottom: calc(0.25 * var(--dropdown-inset-block));
+	text-transform: uppercase;
+	font-size: var(--ui-text-tiny);
+	line-height: var(--ui-text-tiny-lh);
+	letter-spacing: 0.01em;
+	color: var(--color-gray-650);
+}
+
+.dropdown-separator {
+	width: 100%;
+	background: var(--color-gray-250);
+	height: var(--space-1);
+	border: none;
+	margin: 0;
+}
+
+/* Anchoring positions
+-------------------------------------------------- */
+
+/* Mandatory for anchor polyfill since its doesnt support implicit anchoring or constructed style */
+
+#connexion_infos_btn {
+	anchor-name: --connexion-infos;
+}
+
+#connexion_infos {
+	position-anchor: --connexion-infos;
+}
+
+#navigation_mobile_btn {
+	anchor-name: --navigation-mobile;
+}
+
+#navigation_mobile {
+	position-anchor: --navigation-mobile;
+}

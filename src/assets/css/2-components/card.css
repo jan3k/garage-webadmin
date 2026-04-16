@@ -1,0 +1,61 @@
+.card {
+	background: var(--card-box-bg);
+	border: var(--card-box-border-width) solid var(--card-box-border-color);
+	border-radius: var(--card-box-radius);
+	padding: calc(var(--card-box-inset) - var(--card-box-border-width));
+}
+
+/* Cards for links
+-------------------------------------------------- */
+.cardLinkGrid {
+	display: grid;
+	grid-auto-flow: column;
+	gap: var(--space-12);
+}
+
+.cardLink {
+	display: flex;
+	align-items: center;
+	box-shadow: var(--card-box-shadow);
+	border: var(--card-box-border-width) solid var(--card-box-border-color);
+	border-radius: var(--card-box-radius);
+	padding: calc(var(--card-box-inset) - var(--card-box-border-width));
+	text-decoration: none;
+	color: var(--color-gray-900);
+	transition:
+		0.15s translate,
+		0.15s box-shadow,
+		0.15s border-color,
+		0.15s fill;
+}
+
+.cardLink:where(:hover, :focus-visible) {
+	--card-box-border-color: var(--color-gray-650);
+	/* --card-box-ico-color: currentColor; */
+}
+
+.cardLink:where(:active) {
+	--card-box-shadow: 0 0 0 transparent;
+	translate: 0 0.0625rem;
+}
+
+.cardLink--disabled {
+	--card-box-shadow: 0 0 0 transparent;
+	--card-box-border-color: inherit;
+	translate: 0;
+}
+
+.cardLink-ico {
+	color: var(--card-box-ico-color);
+	line-height: 0;
+}
+
+.cardLink-ico svg {
+	width: var(--space-20);
+	height: var(--space-20);
+}
+
+.cardLink-title {
+	text-decoration: underline;
+	font-weight: 500;
+}

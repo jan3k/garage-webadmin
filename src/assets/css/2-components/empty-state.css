@@ -1,0 +1,39 @@
+.emptyState {
+	text-align: center;
+}
+
+.emptyState > * + * {
+	margin-top: 1rem;
+}
+
+.emptyState-ico {
+	display: inline-flex;
+	line-height: 0;
+	border: 0.0625rem solid var(--color-gray-400);
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+}
+
+.emptyState-ico svg {
+	width: 2.25rem;
+	height: 2.25rem;
+	color: var(--color-gray-650);
+}
+
+.emptyState-content {
+	margin-inline: auto;
+	max-width: 55ch;
+}
+
+.emptyState-content > * + * {
+	margin-top: 0.5rem;
+}
+
+.emptyState-actions {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	/* margin-top: 0.75rem; */
+}

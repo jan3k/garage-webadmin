@@ -1,0 +1,21 @@
+.footer {
+	padding: 1rem;
+	padding-bottom: 1.5rem;
+}
+
+.footer :is(ul, li) {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.footer ul {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	text-align: center;
+	gap: 1rem .5rem;
+	font-size: var(--ui-text-small);
+	line-height: var(--ui-text-small-lh);
+	color: var(--color-gray-750);
+}

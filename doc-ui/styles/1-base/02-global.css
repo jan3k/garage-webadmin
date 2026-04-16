@@ -1,0 +1,25 @@
+/* small gap on top of anchored sections scroll scrolled to */
+:where(*) {
+	scroll-margin-top: 1lh;
+	outline-offset: .15rem;
+}
+
+body {
+	background: var(--color-gray-200);
+}
+
+.container {
+	max-width: var(--container);
+}
+
+.container--small {
+	max-width: var(--container-small);
+}
+
+.container--medium {
+	max-width: var(--container-medium);
+}
+
+.container--large {
+	max-width: var(--container-large);
+}

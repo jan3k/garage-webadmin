@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ title }}</title>
+
+	<style>{% include "styles/base.css" %}</style>
+	<style>{% getBundle "css" %}</style>
+	{% include "metatags.njk" %}
+</head>
+<body>
+	{% include "skip-link.njk" %}
+	<header class="header">
+		<a href="/" class="header-logo" aria-label="Homepage">{% include "logo.svg" %}</a>
+		<div class="header-actions">
+			<button class="header-actions_mobileBtn btn" popovertarget="nav_mobile_menu">Menu</button>
+		</div>
+	</header>
+	<div class="theLayout">
+		<nav class="navigation" aria-label="Navigation">
+			{% include "nav.njk" %}
+		</nav>
+		<div class="main" id="main">
+			{{ content | safe }}
+		</div>
+		<nav class="navigationMobile" popover id="nav_mobile_menu" aria-label="Navigation">
+			{% include "nav.njk" %}
+		</nav>
+	</div>
+
+	<footer class="footer">
+		<ul role="list">
+			<li><a href="https://garagehq.deuxfleurs.fr/">Garage website</a></li>
+			<li aria-hidden="true">-</li>
+			<li><a href="https://git.deuxfleurs.fr/Deuxfleurs/garage-webadmin/">Source code</a></li>
+			<li aria-hidden="true">-</li>
+			<li>Hosted by <a href="https://deuxfleurs.fr">Deuxfleurs</a></li>
+		</ul>
+	</footer>
+
+	{% set polyfillImporter %}{% include "js/polyfill-importer.js" %}{% endset %}
+	<script>{{ polyfillImporter | safe }}</script>
+
+	{% set islandImporter %}{% include "node_modules/@11ty/is-land/dist/is-land.min.js" %}{% endset %}
+	<script type="module">{{ islandImporter | safe }}</script>
+
+</body>
+</html>

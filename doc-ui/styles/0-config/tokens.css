@@ -1,0 +1,52 @@
+:root {
+	/* Typography
+	-------------------------------------------------- */
+
+	/* Emoji fonts are explicitely declared at the fontstacks end to be sure to be displayed correctely on every platforms. https://answers.microsoft.com/en-us/windows/forum/all/flag-emoji/85b163bc-786a-4918-9042-763ccf4b6c05 */
+  --fontstack-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --fontstack-monospace: ui-monospace, monospace, var(--fontstack-emoji);
+  --fontstack-sans: ui-sans-serif, system-ui, sans-serif, var(--fontstack-emoji);
+  --fontstack-serif: ui-serif, serif, var(--fontstack-emoji);
+	--fontstack-heading: "Fira Sans", "Fira Sans Fallback", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif, var(--fontstack-emoji);
+
+	--ui-text-display: 2.5rem;
+	--ui-text-display-lh: 1.3;
+	--ui-text-h1: 1.625rem;
+	--ui-text-h1-lh: 1.3846;
+	--ui-text-h2: 1.375rem;
+	--ui-text-h2-lh: 1.3636;
+	--ui-text-h3: 1.125rem;
+	--ui-text-h3-lh: 1.4444;
+	--ui-text-large: 1.125rem;
+	--ui-text-large-lh: 1.44;
+	--ui-text-body: 1rem;
+	--ui-text-body-lh: 1.5;
+	--ui-text-small: .9375rem;
+	--ui-text-small-lh: 1.4285;
+	--ui-text-tiny: .75rem;
+	--ui-text-tiny-lh: 1.5;
+
+	--base-font: var(--ui-text-large);
+	--base-lh: var(--ui-text-large-lh);
+
+	/* Container
+	-------------------------------------------------- */
+
+	--container: 50rem;
+	--container-small: 37.5rem;
+	--container-medium: 53.125rem;
+	--container-large: 68.75rem;
+
+	/* Shadows
+	-------------------------------------------------- */
+	--shadow-light-1: 0 .0625rem .125rem var(--color-gray-350);
+	--shadow-light-2: 0 .125rem .25rem var(--color-gray-350);
+
+	/* Media queries
+	-------------------------------------------------- */
+
+	@custom-media --screen-md (max-width: 768px);
+	@custom-media --screen-md--reverse (min-width: 768px);
+	@custom-media --screen-sm (max-width: 400px);
+	@custom-media --screen-sm--reverse (min-width: 400px);
+}

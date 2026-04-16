@@ -1,0 +1,21 @@
+.example-showcase {
+	border: .0625rem solid var(--color-gray-350);
+	padding: 1rem .75rem;
+	padding-top: .5rem;
+	border-radius: .5rem;
+	background-color: var(--color-gray-100);
+}
+
+.example-showcase_title {
+	display: block;
+	color: var(--color-gray-650);
+	font-size: var(--ui-text-tiny);
+	line-height: var(--ui-text-tiny-lh);
+	text-transform: uppercase;
+	margin-bottom: .5rem;
+	/* padding-left: 1.125rem; */
+}
+
+.example-showcase hr {
+	margin-block: 1ch;
+}

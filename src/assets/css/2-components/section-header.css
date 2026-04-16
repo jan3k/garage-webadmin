@@ -1,0 +1,19 @@
+.sectionHeader {
+	margin-block: var(--container-box-inset);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-12);
+}
+
+.sectionHeader-content {
+	flex-grow: 1;
+}
+
+.sectionHeader-side {
+	align-self: flex-end;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-12);
+}
