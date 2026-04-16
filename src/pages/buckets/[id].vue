@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue"
-import { RouterLink, useRoute, useRouter } from "vue-router"
+import { RouterLink, RouterView, useRoute, useRouter } from "vue-router"
 import { PhArrowRight, PhArrowsCounterClockwise, PhBroom, PhFloppyDisk, PhPlus, PhSpinnerGap, PhTrash } from "@phosphor-icons/vue"
 import type { components } from "../../api-schema.d.ts"
 import Banner from "../../components/Banner.vue"
@@ -56,6 +56,7 @@ const bucketId = computed(() => {
 	const raw = route.params.id
 	return Array.isArray(raw) ? raw[0] : raw
 })
+const isObjectsRoute = computed(() => route.path.endsWith("/objects"))
 
 const bucketName = computed(() => {
 	if (!bucket.value) return bucketId.value || "Bucket"
@@ -398,11 +399,19 @@ async function deleteBucket() {
 	}
 }
 
-watch(bucketId, loadBucket, { immediate: true })
+watch(
+	[bucketId, isObjectsRoute],
+	([, childRoute]) => {
+		if (childRoute) return
+		loadBucket()
+	},
+	{ immediate: true },
+)
 </script>
 
 <template>
-	<LayoutDefault>
+	<RouterView v-if="isObjectsRoute" />
+	<LayoutDefault v-else>
 		<div class="sectionHeader">
 			<div class="sectionHeader-content">
 				<h1 class="title title-1">Bucket</h1>
