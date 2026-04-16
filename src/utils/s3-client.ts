@@ -36,6 +36,17 @@ export class S3ConfigError extends Error {
 	}
 }
 
+const s3DebugEnabled = envFlag("VITE_S3_DEBUG", false)
+
+function s3Debug(message: string, data?: unknown) {
+	if (!s3DebugEnabled) return
+	if (data === undefined) {
+		console.debug(`[s3] ${message}`)
+		return
+	}
+	console.debug(`[s3] ${message}`, data)
+}
+
 function resolveUrl(input: string): URL {
 	if (input.startsWith("http://") || input.startsWith("https://")) {
 		return new URL(input)
@@ -230,12 +241,39 @@ export class S3Client {
 			`AWS4-HMAC-SHA256 Credential=${this.config.accessKeyId}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`,
 		)
 		headers.delete("host")
-
-		return fetch(requestEndpointUrl.toString(), {
+		s3Debug("request", {
 			method: input.method,
-			headers,
-			body: input.body ?? undefined,
+			bucket: input.bucket,
+			key: input.key || null,
+			query: input.query || null,
+			endpoint: requestEndpointUrl.toString(),
 		})
+
+		try {
+			const response = await fetch(requestEndpointUrl.toString(), {
+				method: input.method,
+				headers,
+				body: input.body ?? undefined,
+			})
+			s3Debug("response", {
+				method: input.method,
+				bucket: input.bucket,
+				key: input.key || null,
+				status: response.status,
+				statusText: response.statusText,
+				requestId: response.headers.get("x-amz-request-id"),
+				id2: response.headers.get("x-amz-id-2"),
+			})
+			return response
+		} catch (error) {
+			s3Debug("network_error", {
+				method: input.method,
+				bucket: input.bucket,
+				key: input.key || null,
+				error,
+			})
+			throw error
+		}
 	}
 }
 
@@ -262,6 +300,13 @@ export function createS3ClientFromEnv(): S3Client {
 
 	const proxyPath = import.meta.env.VITE_S3_PROXY_PATH || "/s3"
 	const requestEndpoint = import.meta.env.DEV && endpoint.startsWith("http") ? proxyPath : endpoint
+	s3Debug("client_config", {
+		endpoint,
+		requestEndpoint,
+		region: import.meta.env.VITE_S3_REGION || "garage",
+		forcePathStyle: envFlag("VITE_S3_FORCE_PATH_STYLE", true),
+		hasSessionToken: Boolean(import.meta.env.VITE_S3_SESSION_TOKEN),
+	})
 
 	return new S3Client({
 		endpoint,

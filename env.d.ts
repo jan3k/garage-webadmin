@@ -9,6 +9,7 @@ interface ImportMetaEnv {
 	readonly VITE_S3_SESSION_TOKEN?: string
 	readonly VITE_S3_FORCE_PATH_STYLE?: string
 	readonly VITE_S3_PROXY_PATH?: string
+	readonly VITE_S3_DEBUG?: string
 }
 
 interface ImportMeta {

@@ -47,6 +47,17 @@ export class S3ResponseError extends Error {
 	}
 }
 
+const s3DebugEnabled = !["0", "false", "no", "off"].includes(String(import.meta.env.VITE_S3_DEBUG || "").toLowerCase())
+
+function s3ObjectDebug(message: string, data?: unknown) {
+	if (!s3DebugEnabled) return
+	if (data === undefined) {
+		console.debug(`[s3-object-api] ${message}`)
+		return
+	}
+	console.debug(`[s3-object-api] ${message}`, data)
+}
+
 function getNodeText(parent: Element, tagName: string): string | null {
 	const node = parent.getElementsByTagName(tagName)[0]
 	return node?.textContent?.trim() || null
@@ -64,6 +75,12 @@ async function throwOnHttpError(response: Response, fallbackMessage: string): Pr
 	if (response.ok) return
 	const body = await responseText(response)
 	const message = body || `${fallbackMessage} (${response.status})`
+	s3ObjectDebug("http_error", {
+		fallbackMessage,
+		status: response.status,
+		statusText: response.statusText,
+		body,
+	})
 	throw new S3ResponseError(message, response.status, body)
 }
 
@@ -72,6 +89,10 @@ function parseListObjectsXml(xml: string): S3ListObjectsResult {
 	const doc = parser.parseFromString(xml, "application/xml")
 	const parseError = doc.getElementsByTagName("parsererror")[0]
 	if (parseError) {
+		s3ObjectDebug("xml_parse_error", {
+			error: parseError.textContent || "",
+			xmlHead: xml.slice(0, 500),
+		})
 		throw new Error("Failed to parse S3 XML response")
 	}
 
@@ -108,6 +129,13 @@ function parseListObjectsXml(xml: string): S3ListObjectsResult {
 }
 
 export async function listObjectsV2(client: S3Requester, bucket: string, options: S3ListObjectsInput = {}): Promise<S3ListObjectsResult> {
+	s3ObjectDebug("list_objects_start", {
+		bucket,
+		prefix: options.prefix || "",
+		delimiter: options.delimiter || "",
+		continuationToken: options.continuationToken || null,
+		maxKeys: options.maxKeys || 200,
+	})
 	const response = await client.request({
 		method: "GET",
 		bucket,
@@ -121,7 +149,15 @@ export async function listObjectsV2(client: S3Requester, bucket: string, options
 	})
 
 	await throwOnHttpError(response, "Unable to list S3 objects")
-	return parseListObjectsXml(await response.text())
+	const parsed = parseListObjectsXml(await response.text())
+	s3ObjectDebug("list_objects_done", {
+		bucket,
+		objectCount: parsed.objects.length,
+		commonPrefixCount: parsed.commonPrefixes.length,
+		isTruncated: parsed.isTruncated,
+		nextContinuationToken: parsed.nextContinuationToken,
+	})
+	return parsed
 }
 
 export async function getObjectMetadata(client: S3Requester, bucket: string, key: string): Promise<S3ObjectMetadata> {

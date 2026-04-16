@@ -90,6 +90,16 @@ const inspectObjectKey = ref<string>("")
 
 const objects = computed(() => listing.value?.objects || [])
 const folders = computed(() => listing.value?.commonPrefixes || [])
+const s3DebugEnabled = !["0", "false", "no", "off"].includes(String(import.meta.env.VITE_S3_DEBUG || "").toLowerCase())
+
+function objectsDebug(message: string, data?: unknown) {
+	if (!s3DebugEnabled) return
+	if (data === undefined) {
+		console.debug(`[bucket-objects] ${message}`)
+		return
+	}
+	console.debug(`[bucket-objects] ${message}`, data)
+}
 
 const folderParts = computed(() => {
 	const normalized = prefix.value.replace(/^\/+|\/+$/g, "")
@@ -127,6 +137,13 @@ async function loadObjects({ resetToken = true }: { resetToken?: boolean } = {})
 	if (!s3Client.value || !bucketId.value) return
 
 	try {
+		objectsDebug("load_start", {
+			bucketId: bucketId.value,
+			prefix: prefix.value,
+			delimiter: delimiter.value,
+			continuationToken: continuationToken.value,
+			resetToken,
+		})
 		loading.value = true
 		error.value = null
 		if (resetToken) continuationToken.value = null
@@ -140,9 +157,15 @@ async function loadObjects({ resetToken = true }: { resetToken?: boolean } = {})
 		listing.value = result
 		nextContinuationToken.value = result.nextContinuationToken
 		isTruncated.value = result.isTruncated
+		objectsDebug("load_success", {
+			objectCount: result.objects.length,
+			commonPrefixes: result.commonPrefixes.length,
+			nextContinuationToken: result.nextContinuationToken,
+		})
 	} catch (newError) {
 		listing.value = null
 		error.value = newError
+		objectsDebug("load_error", newError)
 	} finally {
 		loading.value = false
 	}
@@ -227,6 +250,7 @@ async function inspectByKey(key: string) {
 	if (!bucketId.value) return
 
 	try {
+		objectsDebug("inspect_start", { bucketId: bucketId.value, key })
 		inspectLoading.value = true
 		inspectError.value = null
 		inspectObjectKey.value = key
@@ -255,9 +279,14 @@ async function inspectByKey(key: string) {
 				uuid: version.uuid,
 			})),
 		}
+		objectsDebug("inspect_success", {
+			key,
+			versions: inspectObject.value.versions.length,
+		})
 	} catch (newError) {
 		inspectObject.value = null
 		inspectError.value = newError
+		objectsDebug("inspect_error", newError)
 	} finally {
 		inspectLoading.value = false
 	}
